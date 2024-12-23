@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Empleado</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4">Detalle del Empleado</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">ID: <span th:text="${empleado.id}"></span></h5>
+            <p class="card-text">Nombre: <span th:text="${empleado.nombre}"></span></p>
+            <p class="card-text">Apellido: <span th:text="${empleado.apellido}"></span></p>
+            <p class="card-text">Correo: <span th:text="${empleado.correo}"></span></p>
+            <p class="card-text">Salario: <span th:text="${empleado.salario}"></span></p>
+            <p class="card-text">Departamento: <span th:text="${empleado.departamento != null ? empleado.departamento.nombre : 'Sin Departamento'}"></span></p>
+            <a href="/empleados" class="btn btn-primary">Volver a la lista</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

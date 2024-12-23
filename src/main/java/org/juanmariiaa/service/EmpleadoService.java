@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmpleadoService {
@@ -14,27 +13,19 @@ public class EmpleadoService {
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
-    // Método para obtener todos los empleados
     public List<Empleado> obtenerTodosLosEmpleados() {
         return empleadoRepository.findAll();
     }
 
-    // Método para obtener un empleado por su ID
-    public Optional<Empleado> obtenerEmpleadoPorId(Long id) {
-        return empleadoRepository.findById(id);
+    public void guardarEmpleado(Empleado empleado) {
+        empleadoRepository.save(empleado);
     }
 
-    // Método para guardar un nuevo empleado
-    public Empleado guardarEmpleado(Empleado empleado) {
-        return empleadoRepository.save(empleado);
+    public Empleado obtenerEmpleadoPorId(Long id) {
+        return empleadoRepository.findById(id).orElse(null);
     }
 
-
-
-
-    // Método para eliminar un empleado por su ID
-    public void eliminarEmpleado(Long id) {
+    public void borrarEmpleado(Long id) {
         empleadoRepository.deleteById(id);
     }
-
 }

@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @Service
 public class DepartamentoService {
@@ -19,7 +17,15 @@ public class DepartamentoService {
         return departamentoRepository.findAll();
     }
 
+    public Departamento obtenerDepartamentoPorId(Long id) {
+        return departamentoRepository.findById(id).orElse(null);
+    }
+
     public void guardarDepartamento(Departamento departamento) {
         departamentoRepository.save(departamento);
+    }
+
+    public void borrarDepartamento(Long id) {
+        departamentoRepository.deleteById(id);
     }
 }

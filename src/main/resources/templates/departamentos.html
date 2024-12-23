@@ -15,12 +15,18 @@
         <tr>
             <th>ID</th>
             <th>Nombre</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="departamento : ${departamentos}">
             <td th:text="${departamento.id}"></td>
             <td th:text="${departamento.nombre}"></td>
+            <td>
+                <a th:href="@{/departamentos/editar/{id}(id=${departamento.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/departamentos/borrar/{id}(id=${departamento.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Estás seguro de que deseas eliminar este departamento?');">Borrar</a>
+            </td>
         </tr>
         </tbody>
     </table>

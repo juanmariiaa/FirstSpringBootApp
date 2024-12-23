@@ -5,9 +5,7 @@ import org.juanmariiaa.service.DepartamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +32,27 @@ public class DepartamentoController {
     @PostMapping("/departamentos")
     public String guardarDepartamento(@ModelAttribute("departamento") Departamento departamento) {
         departamentoService.guardarDepartamento(departamento);
+        return "redirect:/departamentos";
+    }
+
+    @GetMapping("/departamentos/editar/{id}")
+    public String mostrarFormularioDeEdicion(@PathVariable Long id, Model model) {
+        Departamento departamento = departamentoService.obtenerDepartamentoPorId(id);
+        model.addAttribute("departamento", departamento);
+        return "crear_departamento";
+    }
+
+    @PostMapping("/departamentos/editar/{id}")
+    public String actualizarDepartamento(@PathVariable Long id, @ModelAttribute("departamento") Departamento departamento) {
+        Departamento departamentoExistente = departamentoService.obtenerDepartamentoPorId(id);
+        departamentoExistente.setNombre(departamento.getNombre());
+        departamentoService.guardarDepartamento(departamentoExistente);
+        return "redirect:/departamentos";
+    }
+
+    @GetMapping("/departamentos/borrar/{id}")
+    public String borrarDepartamento(@PathVariable Long id) {
+        departamentoService.borrarDepartamento(id);
         return "redirect:/departamentos";
     }
 }

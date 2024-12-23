@@ -19,6 +19,7 @@
             <th>Correo</th>
             <th>Salario</th>
             <th>Departamento</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +30,12 @@
             <td th:text="${empleado.correo}"></td>
             <td th:text="${empleado.salario}"></td>
             <td th:text="${empleado.departamento != null ? empleado.departamento.nombre : 'Sin Departamento'}"></td>
+            <td>
+                <a th:href="@{/empleados/{id}(id=${empleado.id})}" class="btn btn-info btn-sm">Ver</a>
+                <a th:href="@{/empleados/editar/{id}(id=${empleado.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/empleados/borrar/{id}(id=${empleado.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">Borrar</a>
+            </td>
         </tr>
         </tbody>
     </table>

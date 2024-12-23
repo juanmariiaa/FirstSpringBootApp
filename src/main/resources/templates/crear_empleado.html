@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Empleado</title>
+    <title>Crear/Editar Empleado</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-5">
-    <h1 class="mb-4">Crear Nuevo Empleado</h1>
-    <form action="/empleados" method="post">
+    <h1 class="mb-4" th:text="${empleado.id == null ? 'Crear Nuevo Empleado' : 'Editar Empleado'}"></h1>
+    <form th:action="@{${empleado.id == null ? '/empleados' : '/empleados/editar/' + empleado.id}}" method="post">
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
+            <input type="text" class="form-control" id="nombre" name="nombre" th:value="${empleado.nombre}" required>
         </div>
         <div class="form-group">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido" required>
+            <input type="text" class="form-control" id="apellido" name="apellido" th:value="${empleado.apellido}" required>
         </div>
         <div class="form-group">
             <label for="correo">Correo</label>
-            <input type="email" class="form-control" id="correo" name="correo" required>
+            <input type="email" class="form-control" id="correo" name="correo" th:value="${empleado.correo}" required>
         </div>
         <div class="form-group">
             <label for="salario">Salario</label>
-            <input type="number" step="0.01" class="form-control" id="salario" name="salario" required>
+            <input type="number" step="0.01" class="form-control" id="salario" name="salario" th:value="${empleado.salario}" required>
         </div>
         <div class="form-group">
             <label for="departamento">Departamento</label>
             <select class="form-control" id="departamento" name="departamento.id">
                 <option value="">Seleccione un departamento</option>
                 <option th:each="departamento : ${departamentos}" th:value="${departamento.id}"
-                        th:text="${departamento.nombre}"></option>
+                        th:text="${departamento.nombre}" th:selected="${departamento.id} == ${empleado.departamento?.id}"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
