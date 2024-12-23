@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Proyectos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-$END$
+<div class="container mt-5">
+    <h1 class="mb-4">Lista de Proyectos</h1>
+    <a href="/proyectos/nuevo" class="btn btn-primary mb-4">Añadir Proyecto</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="proyecto : ${proyectos}">
+            <td th:text="${proyecto.id}"></td>
+            <td th:text="${proyecto.nombre}"></td>
+            <td th:text="${proyecto.descripcion}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

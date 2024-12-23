@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Empleados</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-$END$
+<div class="container mt-5">
+    <h1 class="mb-4">Lista de Empleados</h1>
+    <a href="/empleados/nuevo" class="btn btn-primary mb-4">Añadir Empleado</a> <!-- Botón para añadir empleado -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Salario</th>
+            <th>Departamento</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="empleado : ${empleados}">
+            <td th:text="${empleado.id}"></td>
+            <td th:text="${empleado.nombre}"></td>
+            <td th:text="${empleado.apellido}"></td>
+            <td th:text="${empleado.correo}"></td>
+            <td th:text="${empleado.salario}"></td>
+            <td th:text="${empleado.departamento != null ? empleado.departamento.nombre : 'Sin Departamento'}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

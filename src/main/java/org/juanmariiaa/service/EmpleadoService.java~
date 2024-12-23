@@ -29,7 +29,24 @@ public class EmpleadoService {
         return empleadoRepository.save(empleado);
     }
 
+    public Empleado actualizarEmpleado(Long id, Empleado empleado) {
+        // Verificar si existe el empleado con el id proporcionado
+        if (empleadoRepository.existsById(id)) {
+            // Recuperar el empleado existente de la base de datos
+            Empleado empleadoExistente = empleadoRepository.findById(id).orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
 
+            // Actualizar solo los campos necesarios (sin modificar el id)
+            empleadoExistente.setNombre(empleado.getNombre());
+            empleadoExistente.setCorreo(empleado.getCorreo());
+            empleadoExistente.setSalario(empleado.getSalario());
+            empleadoExistente.setDepartamento(empleado.getDepartamento());
+            empleadoExistente.setProyectos(empleado.getProyectos());
+
+            // Guardar el empleado actualizado
+            return empleadoRepository.save(empleadoExistente);
+        }
+        return null; // O lanzar una excepción si el empleado no existe
+    }
 
 
     // Método para eliminar un empleado por su ID

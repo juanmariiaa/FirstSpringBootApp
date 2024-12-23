@@ -1,0 +1,22 @@
+package org.juanmariiaa.repository;
+
+import org.juanmariiaa.model.Proyecto;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+@Repository
+public interface ProyectoRepository extends JpaRepository<Proyecto, Long> {
+
+    // Consulta para obtener proyectos por nombre
+    @Query("SELECT p FROM Proyecto p WHERE p.nombre = :nombre")
+    List<Proyecto> findProyectosByNombre(@Param("nombre") String nombre);
+
+    // Consulta para obtener proyectos por empleado (relación N:M con Empleado)
+    @Query("SELECT p FROM Proyecto p JOIN p.empleados e WHERE e.id = :empleadoId")
+    List<Proyecto> findProyectosByEmpleadoId(@Param("empleadoId") Long empleadoId);
+
+    // Aquí podrías añadir más métodos personalizados si lo necesitas.
+}

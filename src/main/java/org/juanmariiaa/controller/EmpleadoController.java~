@@ -1,9 +1,9 @@
 package org.juanmariiaa.controller;
 
-import org.juanmariiaa.model.Empleado;
 import org.juanmariiaa.model.Departamento;
-import org.juanmariiaa.service.EmpleadoService;
+import org.juanmariiaa.model.Empleado;
 import org.juanmariiaa.service.DepartamentoService;
+import org.juanmariiaa.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+
 
 @Controller
 public class EmpleadoController {
@@ -40,9 +41,6 @@ public class EmpleadoController {
 
     @PostMapping("/empleados")
     public String guardarEmpleado(@ModelAttribute("empleado") Empleado empleado) {
-        if (empleado.getDepartamento() != null && empleado.getDepartamento().getId() == null) {
-            empleado.setDepartamento(null);
-        }
         empleadoService.guardarEmpleado(empleado);
         return "redirect:/empleados";
     }
